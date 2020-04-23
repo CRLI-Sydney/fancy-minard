@@ -129,9 +129,11 @@ ggplot() +
   guides(color = FALSE, size = FALSE)
 ```
 
-Alternatively, we can use `geom_text_repel` from the [`ggrepel` package](https://github.com/slowkow/ggrepel) to automatically move the labels away from points and to ensure none of the labels overlap. We can also adjust the labels so they're easier to read (using [Open Sans](https://fonts.google.com/specimen/Open+Sans)).
 
-```{r troops-map-2, fig.width=10, fig.height=2.5}
+
+<!-- throws an error! Alternatively, we can use `geom_text_repel` from the [`ggrepel` package](https://github.com/slowkow/ggrepel) to automatically move the labels away from points and to ensure none of the labels overlap. We can also adjust the labels so they're easier to read (using [Open Sans](https://fonts.google.com/specimen/Open+Sans)).-->
+
+```{r troops-map-2, eval=FALSE, fig.height=2.5, fig.width=10, include=FALSE}
 ggplot() +
   geom_path(data = troops, aes(x = long, y = lat, group = group, 
                                color = direction, size = survivors),
@@ -193,9 +195,10 @@ ggmap(march.1812.europe.map.wc) +
   theme_nothing()  # This is a special theme that comes with ggmap
 ```
 
-We can also zoom in on just northeastern Europe and add the cities back in. We'll save this plot to an object (`march.1812.plot`) so we can use it later.
+<!-- throws error 
+We can also zoom in on just northeastern Europe and add the cities back in. We'll save this plot to an object (`march.1812.plot`) so we can use it later.--> 
 
-```{r russia-minard, message=FALSE, fig.width=10, fig.height=4}
+```{r russia-minard, eval=FALSE, fig.height=4, fig.width=10, message=FALSE, include=FALSE}
 march.1812.ne.europe <- c(left = 23.5, bottom = 53.4, right = 38.1, top = 56.3)
 
 march.1812.ne.europe.map <- get_stamenmap(bbox = march.1812.ne.europe, zoom = 8,
