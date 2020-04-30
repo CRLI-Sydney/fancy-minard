@@ -237,11 +237,11 @@ ggplot(data = temps, aes(x = long, y = temp)) +
 
 We can create a new variable for nicer labels, combining temperature with the date. We'll also clean up the theme, move the axis label to the right, and only include major horizontal gridlines. When we overlay the two plots, we have to make sure the x-axes align, so we need to use the same x-axis limits used in `march.1812.plot`. Those limits are buried inside the plot object, the parts of which can be accessed with `ggplot_build()`:
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 ggplot_build(march.1812.plot)$layout$panel_ranges[[1]]$x.range
 ```
 
-```{r temps-2, fig.width=10, fig.height=4}
+```{r temps-2, eval=FALSE, fig.height=4, fig.width=10, include=FALSE}
 temps.nice <- temps %>%
   mutate(nice.label = paste0(temp, "°, ", month, ". ", day))
 
@@ -294,7 +294,7 @@ grid::grid.draw(plot.both)
 
 Now that we can align plots correctly, we can combine the map and the temperature:
 
-```{r align-minard}
+```{r align-minard, eval=FALSE, include=FALSE}
 both.1812.plot <- rbind(ggplotGrob(march.1812.plot),
                         ggplotGrob(temps.1812.plot))
 
@@ -304,7 +304,7 @@ grid::grid.draw(both.1812.plot)
 
 They're aligned, but there's an obvious problem—the map is way too small and the temperatures are too tall. With `grid.arrange` it's possible to pass a vector of relative panel heights, which would let us shrink the bottom panel. While using `gtable::rbind()` does let us align the two plots, it doesn't provide an easy way to mess with panel heights. Following [this StackOverflow answer](https://stackoverflow.com/questions/24331107/the-perils-of-aligning-plots-in-ggplot/24333504#24333504), though, we can mess with the ggplot object and adjust the panels manually.
 
-```{r adjust-panels, fig.width=10, fig.height=5.5}
+```{r adjust-panels, eval=FALSE, fig.height=5.5, fig.width=10, include=FALSE}
 # Identify which layout elements are panels
 panels <- both.1812.plot$layout$t[grep("panel", both.1812.plot$layout$name)]
 
@@ -330,7 +330,7 @@ grid::grid.draw(both.1812.plot)
 
 We can follow the same rocess to create a backgroundless version of the map:
 
-```{r combined-simple, fig.width=10, fig.height=4.75}
+```{r combined-simple, eval=FALSE, fig.height=4.75, fig.width=10, include=FALSE}
 # No map this time
 march.1812.plot.simple <- ggplot() +
   geom_path(data = troops, aes(x = long, y = lat, group = group, 
